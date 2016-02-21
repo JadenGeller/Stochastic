@@ -13,6 +13,7 @@ import Erratic
 class StochasticTests: XCTestCase {
     func test2048() {
         var system = StochasticSystem(molecules: [1, 2, 2, 4, 8, 8, 16])
+        // x & x -> 2 * x
         system.simulate(Behavior(Interaction { a, b in
             guard a == b else { return nil }
             return [2 * a]
@@ -22,6 +23,7 @@ class StochasticTests: XCTestCase {
     
     func testRepeat() {
         var system = StochasticSystem(molecules: Repeat(count: 50, repeatedValue: 1))
+        // 1 & 1 -> 1
         system.simulate(Behavior(Interaction { a, b in
             guard a == b else { return nil }
             return [a]
@@ -31,6 +33,8 @@ class StochasticTests: XCTestCase {
     
     func testSteadyState() {
         var system = StochasticSystem(molecules: Array(Repeat(count: 100, repeatedValue: 1)) + [0])
+        // 1 & 1 -> 1 & 0
+        // 0 & 0 -> 0 & 1
         system.simulate(Behavior(Interaction { a, b in
             guard a == b else { return nil }
             return [a, 1 - a]
