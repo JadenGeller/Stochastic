@@ -47,4 +47,8 @@ If you'd like to build your own stopping condition, just create an extension on 
 
 ## Behavior
 
-So, we kinda glossed over something earlier. What's this whole `Behavior` initializer we sent our interaction into!? `Behavior` allows you to create more complicated stochastic processes by giving more control over which interaction will be run. The most basic `Behavior` initializer takes in a single interaction and runs *only* that one, over and over. `Behavior` however can be initialzed with multiple 
+So, we kinda glossed over something earlier. What's this whole `Behavior` initializer we sent our interaction into!? `Behavior` allows you to create more complicated stochastic processes by giving more control over which interaction will be run. The most basic `Behavior` initializer takes in a single interaction and runs *only* that one, over and over. `Behavior` however can be initialzed with multiple interactions such that one will be randomly chosen with each step of the simulation.
+```swift
+let compoundBehavior = Behavior(mergeInteraction, pairSumInteraction)
+```
+Even cooler, you can build your own custom behaviors that randomly generate interactions using your own secret sauce. For example, [Chemical](https://github.com/JadenGeller/Chemical) simulates the existance of rate constants in a system of chemical reactions by providing a behavior that chooses faster reactions with a higher probability than slower reactions.
