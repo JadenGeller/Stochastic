@@ -58,7 +58,7 @@ extension Detector {
             var count = 0
             return { record in
                 if record.isStable {
-                    count++
+                    count += 1
                 } else {
                     count = 0
                 }

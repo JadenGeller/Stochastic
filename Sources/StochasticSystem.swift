@@ -12,6 +12,14 @@ import Erratic
 public struct StochasticSystem<Molecule> {
     internal var backing: RangeReplaceableLazyShuffleCollection<[Molecule]>
     
+    public var molecules: [Molecule] {
+        get {
+            return backing.base
+        } set {
+            backing.base = newValue
+        }
+    }
+    
     /// Construct a system containing `molecules`.
     public init<S: SequenceType where S.Generator.Element == Molecule>(molecules: S) {
         backing = RangeReplaceableLazyShuffleCollection(unshuffled: Array(molecules))
